@@ -1,0 +1,46 @@
+*{
+  text-align: center;
+}
+#wrapper{
+  width: 95%;
+  margin: 0 auto;
+}
+
+#left{
+  width: 49%;
+  display: inline-block;
+  vertical-align: 535%;
+}
+
+#right{
+  margin-top: 5%;
+  width: 49%;
+  display: inline-block;
+}
+div *{
+  margin: 5px auto !important;
+  display: block;
+  text-align: center;
+}
+
+.btn{
+  margin: 10px auto !important;
+  display: block;
+}
+
+.form-control{
+  width: 40%;
+}
+
+#right, #left{
+  border: solid rgb(243, 251, 255) 2px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#bottombox{
+  width: 49%;
+  display: inline;
+}
+
+

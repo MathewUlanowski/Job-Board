@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Hello {{ user.first_name }} Let's edit your job!</h1>
+
+        <h3><a href="/logout">Logout</a></h3>
+        <h3><a href="/dashboard">Back</a></h3>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li style="color: red">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div id="form-box">
+            <form action="/jobs/edit/{{ thisjob.id }}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-7">
+                        <label>Title
+                            <input value="{{ thisjob.title }}" type="text" name="title" class="form-control"
+                                placeholder="title">
+                            </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-7">
+                        <label>description<input value="{{ thisjob.description }}" type="text" name="description"
+                                class="form-control man-overide" rows="5" placeholder="description">
+                        </label>
+                        <label>location<input value="{{ thisjob.location }}" type="text" name="location"
+                                class="form-control man-overide" placeholder="location">
+                        </label>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-primary btn-sm btn-overide">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

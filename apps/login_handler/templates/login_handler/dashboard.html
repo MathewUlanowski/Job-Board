@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_handler/css/dashboard.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Hello, {{ user.first_name }}</h1>
+        <div id="righthead">
+            <form action="/logout">
+                <button>Log Out!</button>
+            </form>
+    
+            <form action="/jobs/new" method="GET">
+                {% csrf_token %}
+                <button>Create a new job</button>
+            </form>
+        </div>
+        
+        
+            <h5>Other People's jobs</h5>
+        <div class="table-ovr-flow">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Job</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table table-striped">
+                    {% for job in jobs %}
+                    <tr>
+                            <td>{{ job.title }}</td>
+                            <td>{{ job.location }}</td>
+                            {% if job.created_by == user %}
+                                    <td>
+                                        <a href="/jobs/{{ job.id }}">View</a> |
+                                        <a href="/delete/{{ job.id }}">Remove</a> | 
+                                        <a href="/jobs/edit/{{ job.id }}">Edit</a> |
+                                        <a href="/join/{{ job.id }}">Add</a>
+                                    </td>
+                                
+                            {% else %}
+                                    <td>
+                                        <a href="/jobs/{{ job.id }}">View</a> |
+                                        <a href="/join/{{ job.id }}">Add</a>
+                                    </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h5>{{ user.first_name }}'s jobs</h5>
+        <div class="table-ovr-flow">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Job</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table table-striped">
+                    {% for job in user.jobs.all %}
+                        <tr>
+                            <td>{{ job.title }}</td>
+                                <td>
+                                    <a href="/jobs/{{ job.id }}">View</a> |
+                                    <a href="/delete/{{ job.id }}">Done</a> | 
+                                    <a href="/unjoin/{{ job.id }}">Give up</a>
+                                </td>
+                        </tr>
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_handler/css/tripsmaker.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Hello {{ user.first_name }} Let's create your job!</h1>
+        <h3><a href="/logout">Logout</a></h3>
+        <h3><a href="/dashboard">Back</a></h3>
+        <div id="form-box">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/jobs/new" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-7">
+                        <input type="text" name="title" class="form-control man-overide" placeholder="title">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-7">
+                        <textarea type="text" name="description" class="form-control man-overide" rows="5" placeholder="description"></textarea>
+                        <input type="text" name="location" class="form-control man-overide" placeholder="location">
+                    </div>
+                </div>
+                <div class="checkboxformat">
+                    <label for="Trivial">Trivial</label>
+                    <input type="checkbox" value="Trivial" name="Trivial">
+                </div>
+                <div class="checkboxformat">
+                    <label for="Intermediate">Intermediate</label>
+                    <input type="checkbox" value="Intermediate" name="Intermediate">
+                </div>
+                <div class="checkboxformat">
+                    <label for="Difficult">Difficult</label>
+                    <input type="checkbox" value="Difficult" name="Difficult">
+                </div>
+                <div class="form-row">
+                    <div class="col-7">
+                        <input type="text" name="other" name="other" class="form-control man-overide" placeholder="other">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-primary btn-sm btn-overide">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

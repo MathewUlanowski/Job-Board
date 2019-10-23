@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_handler/css/index.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Hello {{ user.first_name }}! These are the job details!</h1>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+        <h3>{{ job.title }}</h3>
+        <div class="simple-outline">
+            <h5>{{ job.description }}</h5>
+            <h5>{{ job.location }}</h5>
+            <h5>Posted by {{ job.created_by.first_name }} {{ job.created_by.last_name }}</h5>
+            <h5>Posted on {{ job.Created_at }}</h5>
+            <h5>Catagory: {{ job.catagory }}
+            </h5>
+        </div>
+        {% if user in job.users.all %}
+        <div class="rounded border border-primary" id="bottombox">
+                <a href="/unjoin/{{ job.id }}">give up</a>
+            </div>
+        {% else %}
+            <div class="rounded border border-primary" id="bottombox">
+                <a href="/join/{{ job.id }}">add to my jobs</a>
+            </div>
+        {% endif%}
+    </div>
+</body>
+</html>

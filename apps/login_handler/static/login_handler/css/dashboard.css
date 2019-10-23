@@ -1,0 +1,10 @@
+#righthead{
+    display: inline-block !important;
+}
+h1{
+    display: inline-block;
+    margin-right: 66%;
+}
+#righthead *{
+    display: inline-block;
+}
